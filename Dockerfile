@@ -1,18 +1,14 @@
-# Используем официальный образ Python
 FROM python:3.11-slim
 
-# Устанавливаем ffmpeg
+# Устанавливаем ffmpeg для обработки аудио
 RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы проекта
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копируем остальной код
 COPY . .
 
-# Команда для запуска бота
-CMD ["python", "deepseek_bot.py"]
+# Команда для запуска
+CMD ["python", "bot.py"]
